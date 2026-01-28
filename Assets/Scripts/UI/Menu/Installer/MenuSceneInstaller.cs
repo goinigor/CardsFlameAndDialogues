@@ -1,7 +1,7 @@
-﻿using CFD.UI.Menu;
+﻿using CFD.Core;
 using UnityEngine;
 
-namespace CFD.Core
+namespace CFD.UI.Menu
 {
     public class MenuSceneInstaller : AbstractMonoInstaller
     {

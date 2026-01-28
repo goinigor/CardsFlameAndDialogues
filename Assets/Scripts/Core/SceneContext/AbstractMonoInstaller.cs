@@ -6,7 +6,7 @@ namespace CFD.Core
     public abstract class AbstractMonoInstaller : MonoBehaviour, IDisposable
     {
         public abstract void InstallBindings();
-        public abstract void Dispose();
         public abstract void Initialize();
+        public abstract void Dispose();
     }
 }
