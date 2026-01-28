@@ -3,28 +3,26 @@ using UnityEngine;
 
 namespace CFD.Core
 {
-    /// <summary>
-    /// Similar to the Bootstrap class, but for the current scene context. Initialize and resolve dependencies
-    /// </summary>
-    public class SceneContext : MonoBehaviour
+    public class MenuSceneInstaller : AbstractMonoInstaller
     {
         [SerializeField] private MainMenuView _mainMenuView;
         
         private MainMenuPresenter _mainMenuPresenter;
 
-        private void Awake()
+        public override void InstallBindings()
         {
+            
             var sceneController = ServiceLocator.Resolve<ISceneController>();
             
             _mainMenuPresenter = new MainMenuPresenter(_mainMenuView, sceneController);
         }
-
-        private void Start()
+        
+        public override void Initialize()
         {
             _mainMenuPresenter.Initialize();
         }
-
-        private void OnDestroy()
+        
+        public override void Dispose()
         {
             _mainMenuPresenter.Dispose();
         }
