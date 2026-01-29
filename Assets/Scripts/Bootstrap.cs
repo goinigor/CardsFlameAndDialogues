@@ -17,6 +17,7 @@ namespace CFD
             _sceneControllerService.Initialize();
             DontDestroyOnLoad(_sceneControllerService.gameObject);
             
+            ServiceLocator.Register<API>(new API());
         }
 
         private void Start()
