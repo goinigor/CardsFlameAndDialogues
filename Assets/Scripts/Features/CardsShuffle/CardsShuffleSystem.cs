@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CFD.Features.CardsShuffle
@@ -23,8 +24,6 @@ namespace CFD.Features.CardsShuffle
             DisposeCTS();
             _cancellationTokenSource = new CancellationTokenSource();
 
-            _cardsAnimationBehaviour.OnCardAnimationEnd += OnCardAnimationEnded;
-            
             var cards = new List<CardView>();
             
             var count = _config.CardsCount;
@@ -46,21 +45,29 @@ namespace CFD.Features.CardsShuffle
             AnimateCards(_cancellationTokenSource.Token);
         }
 
-        private void OnCardAnimationEnded(CardView card)
-        {
-            card.transform.SetParent(_cardsAnimationBehaviour.EndDeckTransform, true);
-            
-            
-        }
-
         private async void AnimateCards(CancellationToken token)
         {
-            await _cardsAnimationBehaviour.AnimateStartingDrop(token);
+            await _cardsAnimationBehaviour.AnimateStartingDrop(OnStartDropCardAnimationEnded, token);
+            
+            if (token.IsCancellationRequested)
+                return;
+
+            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token).SuppressCancellationThrow();
             
             if (token.IsCancellationRequested)
                 return;
             
-            await _cardsAnimationBehaviour.AnimateShuffle(token);
+            await _cardsAnimationBehaviour.AnimateShuffle(OnShuffleCardAnimationEnded, token);
+        }
+
+        private void OnStartDropCardAnimationEnded(CardView card)
+        {
+            card.transform.SetParent(_cardsAnimationBehaviour.StartDeckTransform, true);
+        }
+        
+        private void OnShuffleCardAnimationEnded(CardView card)
+        {
+            card.transform.SetParent(_cardsAnimationBehaviour.EndDeckTransform, true);
         }
 
         private void DisposeCTS()

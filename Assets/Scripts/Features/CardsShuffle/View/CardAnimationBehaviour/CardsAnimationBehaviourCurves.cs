@@ -8,8 +8,6 @@ namespace CFD.Features.CardsShuffle
 {
     public class CardsAnimationBehaviourCurves : MonoBehaviour, ICardsAnimationBehaviour
     {
-        public event Action<CardView> OnCardAnimationEnd;
-        
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private Transform _cardsStartPosition;
         [SerializeField] private Transform _cardsEndPosition;
@@ -30,6 +28,7 @@ namespace CFD.Features.CardsShuffle
         [SerializeField] private float _shuffleDelay = 1f;
         [Tooltip("Duration of the shuffle animation in seconds")]
         [SerializeField] private float _shuffleDuration = 1f;
+        
         public Transform SpawnPoint => _spawnPoint;
         public Transform StartDeckTransform => _cardsStartPosition;
         public Transform EndDeckTransform => _cardsEndPosition;
@@ -54,8 +53,9 @@ namespace CFD.Features.CardsShuffle
         /// <summary>
         /// Animate cards to drop from the _spawnPoint to the _cardsStartPosition
         /// </summary>
+        /// <param name="onCardAnimationEnd">Callback invoked when each card animation completes</param>
         /// <param name="token"></param>
-        public async UniTask AnimateStartingDrop(CancellationToken token)
+        public async UniTask AnimateStartingDrop(Action<CardView> onCardAnimationEnd, CancellationToken token)
         {
             if (_cards == null || _cards.Count == 0)
                 return;
@@ -65,13 +65,13 @@ namespace CFD.Features.CardsShuffle
             for (int i = 0; i < _cards.Count; i++)
             {
                 var card = _cards[i];
-                dropTasks.Add(AnimateCardDrop(card, i * _dropDelay, i * _cardShiftingOffset, token));
+                dropTasks.Add(AnimateCardDrop(card, i * _dropDelay, i * _cardShiftingOffset, onCardAnimationEnd, token));
             }
 
             await UniTask.WhenAll(dropTasks);
         }
 
-        private async UniTask AnimateCardDrop(CardView card, float initialDelay, Vector3 cardShiftingOffset, CancellationToken token)
+        private async UniTask AnimateCardDrop(CardView card, float initialDelay, Vector3 cardShiftingOffset, Action<CardView> onCardAnimationEnd, CancellationToken token)
         {
             if (initialDelay > 0)
                 await UniTask.Delay(TimeSpan.FromSeconds(initialDelay), cancellationToken: token).SuppressCancellationThrow();
@@ -80,14 +80,15 @@ namespace CFD.Features.CardsShuffle
                 return;
             
             var endPosition = _cardsStartPosition.position + cardShiftingOffset;
-            await AnimateCard(card, _spawnPoint.position, endPosition, _dropDuration, token);
+            await AnimateCard(card, _spawnPoint.position, endPosition, _dropDuration, onCardAnimationEnd, token);
         }
 
         /// <summary>
         /// Animate cards to shuffle from the _cardsStartPosition to the _cardsEndPosition
         /// </summary>
+        /// <param name="onCardAnimationEnd">Callback invoked when each card animation completes</param>
         /// <param name="token"></param>
-        public async UniTask AnimateShuffle(CancellationToken token)
+        public async UniTask AnimateShuffle(Action<CardView> onCardAnimationEnd, CancellationToken token)
         {
             if (_cards == null || _cards.Count == 0)
                 return;
@@ -98,7 +99,7 @@ namespace CFD.Features.CardsShuffle
             {
                 var backwardIndex = _cards.Count - 1 - i;
                 var card = _cards[backwardIndex];
-                shuffleTasks.Add(AnimateCardShuffle(card, i * _shuffleDelay, i * _cardShiftingOffset, token));
+                shuffleTasks.Add(AnimateCardShuffle(card, i * _shuffleDelay, i * _cardShiftingOffset, onCardAnimationEnd, token));
             }
 
             await UniTask.WhenAll(shuffleTasks);
@@ -108,6 +109,7 @@ namespace CFD.Features.CardsShuffle
             CardView card,
             float initialDelay,
             Vector3 cardShiftingOffset,
+            Action<CardView> onCardAnimationEnd,
             CancellationToken token
             )
         {
@@ -118,7 +120,7 @@ namespace CFD.Features.CardsShuffle
                 return;
             
             var endPosition = _cardsEndPosition.position + cardShiftingOffset;
-            await AnimateCard(card, card.transform.position, endPosition, _shuffleDuration, token);
+            await AnimateCard(card, card.transform.position, endPosition, _shuffleDuration, onCardAnimationEnd, token);
         }
 
         /// <summary>
@@ -129,6 +131,7 @@ namespace CFD.Features.CardsShuffle
             Vector3 startPos,
             Vector3 endPos,
             float duration,
+            Action<CardView> onCardAnimationEnd,
             CancellationToken token)
         {
             var elapsedTime = 0f;
@@ -154,7 +157,7 @@ namespace CFD.Features.CardsShuffle
 
             //hard set the position in the end
             cardTransform.position = endPos;
-            OnCardAnimationEnd?.Invoke(card);
+            onCardAnimationEnd?.Invoke(card);
         }
     }
 }

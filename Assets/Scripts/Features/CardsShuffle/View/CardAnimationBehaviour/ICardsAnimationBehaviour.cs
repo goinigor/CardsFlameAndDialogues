@@ -8,13 +8,12 @@ namespace CFD.Features.CardsShuffle
 {
     public interface ICardsAnimationBehaviour
     {
-        event Action<CardView> OnCardAnimationEnd;
         Transform SpawnPoint { get; }
         public Transform StartDeckTransform {get;}
         public Transform EndDeckTransform {get;}
         void SetCardShiftingOffset(Vector3 cardShiftingOffset);
         void SetCardsTransforms(List<CardView> cards);
-        UniTask AnimateStartingDrop(CancellationToken token);
-        UniTask AnimateShuffle(CancellationToken token);
+        UniTask AnimateStartingDrop(Action<CardView> onCardAnimationEnd, CancellationToken token);
+        UniTask AnimateShuffle(Action<CardView> onCardAnimationEnd, CancellationToken token);
     }
 }
