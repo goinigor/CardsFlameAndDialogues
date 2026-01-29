@@ -10,13 +10,22 @@ namespace CFD.Features.CardsShuffle
     {
         private readonly CardsShuffleConfig _config;
         private readonly ICardsAnimationBehaviour _cardsAnimationBehaviour;
-        
+        private readonly DeckCountView _startDeckCounterView;
+        private readonly DeckCountView _endDeckCounterView;
+
         private CancellationTokenSource _cancellationTokenSource;
 
-        public CardsShuffleSystem(CardsShuffleConfig config, ICardsAnimationBehaviour cardsAnimationBehaviour)
+        public CardsShuffleSystem(
+            CardsShuffleConfig config, 
+            ICardsAnimationBehaviour cardsAnimationBehaviour,
+            DeckCountView startDeckCounterView,
+            DeckCountView endDeckCounterView
+            )
         {
             _config = config;
             _cardsAnimationBehaviour = cardsAnimationBehaviour;
+            _startDeckCounterView = startDeckCounterView;
+            _endDeckCounterView = endDeckCounterView;
         }
 
         public void Initialize()
@@ -63,11 +72,14 @@ namespace CFD.Features.CardsShuffle
         private void OnStartDropCardAnimationEnded(CardView card)
         {
             card.transform.SetParent(_cardsAnimationBehaviour.StartDeckTransform, true);
+            _startDeckCounterView.SetText(_cardsAnimationBehaviour.StartDeckTransform.childCount.ToString());
         }
         
         private void OnShuffleCardAnimationEnded(CardView card)
         {
             card.transform.SetParent(_cardsAnimationBehaviour.EndDeckTransform, true);
+            _startDeckCounterView.SetText(_cardsAnimationBehaviour.StartDeckTransform.childCount.ToString());
+            _endDeckCounterView.SetText(_cardsAnimationBehaviour.EndDeckTransform.childCount.ToString());
         }
 
         private void DisposeCTS()

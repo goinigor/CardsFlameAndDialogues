@@ -9,6 +9,8 @@ namespace CFD.UI.InGame
         [SerializeField] private InGameBaseUI _inGameBaseUI;
         [SerializeField] private CardsAnimationBehaviourCurves _cardsAnimationBehaviour;
         [SerializeField] private CardsShuffleConfig _cardsShuffleConfig;
+        [SerializeField] private DeckCountView _startDeckCounter;
+        [SerializeField] private DeckCountView _endDeckCounter;
         
         private InGameBaseUIPresenter _inGameBaseUIPresenter;
         private CardsShuffleSystem _cardsShuffleSystem;
@@ -18,7 +20,7 @@ namespace CFD.UI.InGame
             var sceneController = ServiceLocator.Resolve<ISceneController>();
             _inGameBaseUIPresenter = new InGameBaseUIPresenter(_inGameBaseUI, sceneController);
             
-            _cardsShuffleSystem = new CardsShuffleSystem(_cardsShuffleConfig, _cardsAnimationBehaviour);
+            _cardsShuffleSystem = new CardsShuffleSystem(_cardsShuffleConfig, _cardsAnimationBehaviour, _startDeckCounter, _endDeckCounter);
         }
 
         public override void Initialize()
