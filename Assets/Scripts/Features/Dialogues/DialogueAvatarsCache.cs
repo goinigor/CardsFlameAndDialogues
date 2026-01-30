@@ -8,6 +8,12 @@ namespace CFD.Features.Dialogues
 {
     public class DialogueAvatarsCache : IDisposable
     {
+        private struct IconsData
+        {
+            public Texture2D texture;
+            public Sprite sprite;
+        }
+        
         private readonly API _api;
 
         public DialogueAvatarsCache(API api)
@@ -15,22 +21,22 @@ namespace CFD.Features.Dialogues
             _api = api;
         }
         
-        private Dictionary<string, Texture2D> _avatars = new Dictionary<string, Texture2D>();
+        private Dictionary<string, IconsData> _avatars = new Dictionary<string, IconsData>();
 
         public async UniTask<Sprite> GetAvatar(AvatarData avatarData, CancellationToken token)
         {
             if (_avatars.TryGetValue(avatarData.name, out var avatar))
             {
-                var sprite = Sprite.Create(avatar, new Rect(0, 0, avatar.width, avatar.height), Vector2.zero);
-                return sprite;
+                return avatar.sprite;
             }
 
             var downloadedAvatar = await _api.DownloadTexture2D(avatarData.url, token);
             if (token.IsCancellationRequested || downloadedAvatar == null)
                 return null;
             
-            _avatars.Add(avatarData.name, downloadedAvatar);
             var createdSprite = Sprite.Create(downloadedAvatar, new Rect(0, 0, downloadedAvatar.width, downloadedAvatar.height), Vector2.zero);
+            _avatars.Add(avatarData.name, new IconsData { texture = downloadedAvatar, sprite = createdSprite });
+            
             return createdSprite;
         }
 
@@ -38,7 +44,8 @@ namespace CFD.Features.Dialogues
         {
             foreach (var avatar in _avatars)
             {
-                UnityEngine.Object.Destroy(avatar.Value);
+                UnityEngine.Object.Destroy(avatar.Value.texture);
+                UnityEngine.Object.Destroy(avatar.Value.sprite);
             }
             
             _avatars.Clear();
