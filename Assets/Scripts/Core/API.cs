@@ -74,11 +74,13 @@ public class API : IService
             {
                 request.timeout = (int)timeoutSeconds;
 
+                Debug.Log($"[API] Downloading texture from {url}");
+                
                 await request.SendWebRequest().WithCancellation(cancellationToken);
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogWarning($"[API] Failed to download texture from {url}: {request.error}");
+                    Debug.LogError($"[API] Failed to download texture from {url}: {request.error}");
                     return null;
                 }
 
@@ -93,7 +95,7 @@ public class API : IService
         }
         catch (Exception e)
         {
-            Debug.LogWarning($"[API] Error downloading Texture: {e.Message}");
+            Debug.LogError($"[API] Error downloading Texture: {e.Message}");
             return null;
         }
     }

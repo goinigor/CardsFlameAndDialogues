@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Threading;
 using CFD.Core.UI;
 using Cysharp.Threading.Tasks;
 using TMPro;
@@ -18,17 +19,16 @@ namespace CFD.Features.Dialogues
         [SerializeField] private Sprite _loadingSprite;
 
         private InputAction _submitAction;
-        private InputAction _clickAction;
+        private CancellationTokenSource _iconLoadCTS;
 
         private void Start()
         {
             _submitAction = InputSystem.actions.FindAction("Submit");
-            _clickAction = InputSystem.actions.FindAction("Click");
         }
 
         private void Update()
         {
-            if (_submitAction.WasPressedThisFrame() || _clickAction.WasPressedThisFrame())
+            if (_submitAction.WasPressedThisFrame())
             {
                 OnNextDialogue();
             }
@@ -82,15 +82,30 @@ namespace CFD.Features.Dialogues
             }
         }
 
-        public async void SetUserIcon(UniTask<Sprite> sprite)
+        public async void SetUserIcon(UniTask<Sprite> sprite, CancellationToken cancellationToken = default)
         {
+            DisposeCTS();
+            
+            _iconLoadCTS = new CancellationTokenSource();
+    
             _leftView.SetUserIconLoading();
             _rightView.SetUserIconLoading();
-            
-            var downloadedSprite = await sprite;
-            
-            _leftView.SetUserIcon(downloadedSprite);
-            _rightView.SetUserIcon(downloadedSprite);
+
+            var token = _iconLoadCTS.Token;
+            var downloadedSprite = await sprite.AttachExternalCancellation(token).SuppressCancellationThrow();
+
+            if (!token.IsCancellationRequested)
+            {
+                _leftView.SetUserIcon(downloadedSprite.Result);
+                _rightView.SetUserIcon(downloadedSprite.Result);
+            }
+        }
+
+        private void DisposeCTS()
+        {
+            _iconLoadCTS?.Cancel();
+            _iconLoadCTS?.Dispose();
+            _iconLoadCTS = null;
         }
     }
 }
