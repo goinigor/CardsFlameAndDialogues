@@ -1,19 +1,60 @@
-﻿using CFD.Core.UI;
+﻿using System;
+using CFD.Core.UI;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace CFD.Features.Dialogues
 {
-    public class DialoguesView : View
+    public class DialoguesView : View, IPointerClickHandler
     {
+        public event Action OnNextDialogueRequested;
+        
+        [SerializeField] private UserView _leftView;
+        [SerializeField] private UserView _rightView;
         [SerializeField] private TMP_Text _dialogueText;
-        [SerializeField] private TMP_Text _userNameLeft;
-        [SerializeField] private TMP_Text _userNameRight;
-        [SerializeField] private Image _userIconLeft;
-        [SerializeField] private Image _userIconRight;
         [SerializeField] private Sprite _loadingSprite;
+
+        private InputAction _submitAction;
+        private InputAction _clickAction;
+
+        private void Start()
+        {
+            _submitAction = InputSystem.actions.FindAction("Submit");
+            _clickAction = InputSystem.actions.FindAction("Click");
+        }
+
+        private void Update()
+        {
+            if (_submitAction.WasPressedThisFrame() || _clickAction.WasPressedThisFrame())
+            {
+                OnNextDialogue();
+            }
+        }
+
+        public override void Show()
+        {
+            base.Show();
+            InputSystem.actions.Enable();
+        }
+
+        public override void Hide()
+        {
+            base.Hide();
+            InputSystem.actions.Disable();
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnNextDialogue();
+        }
+
+        private void OnNextDialogue()
+        {
+            OnNextDialogueRequested?.Invoke();
+        }
 
         public void SetDialogueText(string text)
         {
@@ -22,28 +63,34 @@ namespace CFD.Features.Dialogues
 
         public void SetUserName(string name)
         {
-            _userNameLeft.text = name;
-            _userNameRight.text = name;
+            _leftView.SetUserName(name);
+            _rightView.SetUserName(name);
         }
 
         public void SetUserIconSide(AvatarPosition side)
         {
-            _userNameLeft.gameObject.SetActive(side == AvatarPosition.left);
-            _userNameRight.gameObject.SetActive(side == AvatarPosition.right);
-            
-            _userIconLeft.gameObject.SetActive(side == AvatarPosition.left);
-            _userIconRight.gameObject.SetActive(side == AvatarPosition.right);
+            switch (side)
+            {
+                case AvatarPosition.left:
+                    _leftView.Show();
+                    _rightView.Hide();
+                    break;
+                case AvatarPosition.right:
+                    _leftView.Hide();
+                    _rightView.Show();
+                    break;
+            }
         }
-        
+
         public async void SetUserIcon(UniTask<Sprite> sprite)
         {
-            //TODO add loading wheel instead of sprite
-            _userIconLeft.sprite = _loadingSprite;
-            _userIconRight.sprite = _loadingSprite;
+            _leftView.SetUserIconLoading();
+            _rightView.SetUserIconLoading();
             
             var downloadedSprite = await sprite;
-            _userIconLeft.sprite = downloadedSprite;
-            _userIconRight.sprite = downloadedSprite;
+            
+            _leftView.SetUserIcon(downloadedSprite);
+            _rightView.SetUserIcon(downloadedSprite);
         }
     }
 }

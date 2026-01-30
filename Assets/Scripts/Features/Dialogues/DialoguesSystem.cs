@@ -47,6 +47,7 @@ namespace CFD.Features.Dialogues
             _dialoguesData = data;
             
             _dialoguesPresenter.Show();
+            _dialoguesPresenter.OnNextDialogueRequested += ShowNextDialogue;
             ShowNextDialogue();
         }
 
@@ -57,6 +58,7 @@ namespace CFD.Features.Dialogues
             if (_currentDialogueIndex >= _dialoguesData.dialogue.Count)
             {
                 _dialoguesPresenter.Hide();
+                _dialoguesPresenter.OnNextDialogueRequested -= ShowNextDialogue;
                 return;
             }
             
@@ -91,6 +93,7 @@ namespace CFD.Features.Dialogues
         public void Dispose()
         {
             DisposeCTS();
+            _dialoguesPresenter.OnNextDialogueRequested -= ShowNextDialogue;
         }
     }
 }

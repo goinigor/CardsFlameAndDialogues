@@ -6,6 +6,8 @@ namespace CFD.Features.Dialogues
 {
     public class DialoguesPresenter : IDisposable
     {
+        public event Action OnNextDialogueRequested;
+        
         private readonly DialoguesView _view;
 
         public DialoguesPresenter(DialoguesView view)
@@ -16,13 +18,20 @@ namespace CFD.Features.Dialogues
         public void Show()
         {
             _view.Show();
+            _view.OnNextDialogueRequested += OnNextDialogue;
         }
 
         public void Hide()
         {
+            _view.OnNextDialogueRequested -= OnNextDialogue;
             _view.Hide();
         }
 
+        private void OnNextDialogue()
+        {
+            OnNextDialogueRequested?.Invoke();
+        }
+        
         public void SetNextDialogue(string userName, string text, UniTask<Sprite> avatarSprite, AvatarPosition side)
         {
             _view.SetDialogueText(text);
@@ -33,7 +42,7 @@ namespace CFD.Features.Dialogues
 
         public void Dispose()
         {
-            
+            _view.OnNextDialogueRequested -= OnNextDialogue;
         }
     }
 }
