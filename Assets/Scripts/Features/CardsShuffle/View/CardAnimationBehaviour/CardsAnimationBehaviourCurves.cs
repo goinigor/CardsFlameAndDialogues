@@ -139,9 +139,6 @@ namespace CFD.Features.CardsShuffle
             
             while (elapsedTime < duration)
             {
-                if (token.IsCancellationRequested)
-                    return;
-                
                 elapsedTime += Time.deltaTime;
                 var progress = Mathf.Clamp01(elapsedTime / duration);
                 var speedValue = _speedCurve.Evaluate(progress);
@@ -153,8 +150,11 @@ namespace CFD.Features.CardsShuffle
                 cardTransform.position = finalPosition;
                 
                 await UniTask.Yield(cancellationToken: token).SuppressCancellationThrow();
+                
+                if (token.IsCancellationRequested)
+                    return;
             }
-
+            
             //hard set the position in the end
             cardTransform.position = endPos;
             onCardAnimationEnd?.Invoke(card);

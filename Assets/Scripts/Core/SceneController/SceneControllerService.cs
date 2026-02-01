@@ -1,4 +1,5 @@
 using System;
+using CFD.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,12 +16,15 @@ namespace CFD.Core
         [SerializeField] private bool _useAsyncLoading = true;
 
         private bool _isLoading = false;
+        private LoadingScreen _loadingScreen;
 
         public void Initialize()
         {
             Debug.Log("[SceneController] Initialized");
 
             SceneManager.sceneLoaded += OnSceneLoaded;
+
+            _loadingScreen = ServiceLocator.Resolve<LoadingScreen>();
         }
 
         public void Dispose()
@@ -44,7 +48,7 @@ namespace CFD.Core
             }
 
             Debug.Log($"[SceneController] Loading scene: {buildIndex}");
-
+            
             if (_useAsyncLoading)
             {
                 LoadSceneAsyncCoroutine(buildIndex, null).Forget();
@@ -55,24 +59,7 @@ namespace CFD.Core
             }
         }
 
-        public void LoadSceneAsync(int buildIndex, Action onComplete = null)
-        {
-            if (_isLoading)
-            {
-                Debug.LogWarning($"[SceneController] Already loading a scene. Ignoring load request for: {buildIndex}");
-                return;
-            }
-
-            if (buildIndex <= 0)
-            {
-                Debug.LogError("[SceneController] Cannot load scene with index lower than 1");
-                return;
-            }
-
-            LoadSceneAsyncCoroutine(buildIndex, onComplete).Forget();
-        }
-
-        private async UniTask LoadSceneAsyncCoroutine(int buildIndex, Action onComplete)//TODO add cancellation token
+        private async UniTask LoadSceneAsyncCoroutine(int buildIndex, Action onComplete)
         {
             if (!SceneExists(buildIndex))
             {
@@ -82,8 +69,20 @@ namespace CFD.Core
             
             _isLoading = true;
 
-            var startTime = Time.time;
+            var showLoadingEnd = false;
+            void ShowLoadingEnd() => showLoadingEnd = true;
+            
+            _loadingScreen.OnShowAnimationEnded += ShowLoadingEnd;
+            _loadingScreen.Show();
 
+            while (!showLoadingEnd)
+            {
+                await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
+            }
+            
+            _loadingScreen.OnShowAnimationEnded -= ShowLoadingEnd;
+            
+            var startTime = Time.time;
             var asyncLoad = SceneManager.LoadSceneAsync(buildIndex);
 
             if (asyncLoad == null)
@@ -92,7 +91,7 @@ namespace CFD.Core
                 _isLoading = false;
                 return;
             }
-
+            
             // Wait until the scene is fully loaded
             while (!asyncLoad.isDone)
             {
@@ -125,7 +124,7 @@ namespace CFD.Core
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            //TODO add loading screen
+            _loadingScreen.Hide();
             Debug.Log($"[SceneController] Scene loaded event: {scene.name}");
         }
 

@@ -8,7 +8,7 @@ namespace CFD.Core
         private void Awake()
         {
             // Check if another EventSystem already exists
-            if (FindObjectsOfType<EventSystem>().Length > 1)
+            if (FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length > 1)
             {
                 Destroy(gameObject);
                 return;

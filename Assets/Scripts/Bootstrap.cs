@@ -1,4 +1,5 @@
 using CFD.Core;
+using CFD.UI;
 using UnityEngine;
 
 namespace CFD
@@ -8,16 +9,19 @@ namespace CFD
     /// </summary>
     public class Bootstrap : MonoBehaviour
     {
-        //TODO add loading screen
         [SerializeField] private SceneControllerService _sceneControllerService;
+        [SerializeField] private LoadingScreen _loadingScreen;
         
         private void Awake()
         {
+            ServiceLocator.Register<LoadingScreen>(_loadingScreen);
             ServiceLocator.Register<ISceneController>(_sceneControllerService);
-            _sceneControllerService.Initialize();
-            DontDestroyOnLoad(_sceneControllerService.gameObject);
-            
             ServiceLocator.Register<API>(new API());
+            
+            _sceneControllerService.Initialize();
+            
+            DontDestroyOnLoad(_loadingScreen.gameObject);
+            DontDestroyOnLoad(_sceneControllerService.gameObject);
         }
 
         private void Start()
