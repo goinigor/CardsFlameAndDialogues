@@ -153,7 +153,7 @@ MonoBehaviour:
   _cardsShuffleConfig: {fileID: 11400000, guid: 628221086c31ce34db33763aadd61684, type: 2}
   _startDeckCounter: {fileID: 1874798293}
   _endDeckCounter: {fileID: 4172687108805049109}
-  _endingText: {fileID: 0}
+  _endingText: {fileID: 702315179}
 --- !u!4 &121830081
 Transform:
   m_ObjectHideFlags: 0
