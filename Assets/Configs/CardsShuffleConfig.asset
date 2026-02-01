@@ -16,5 +16,9 @@ MonoBehaviour:
   _cardsCount: 144
   _cardShiftingOffset: {x: 0, y: 0.006, z: 0.01}
   _cardMaterials:
-  - {fileID: 2100000, guid: 8aaf53d9418630841b7b2da43c9cd206, type: 2}
-  _fallbackMaterial: {fileID: 2100000, guid: 8aaf53d9418630841b7b2da43c9cd206, type: 2}
+  - {fileID: 2100000, guid: f78d3bbbdfd9b6746a26625c926101d1, type: 2}
+  - {fileID: 2100000, guid: 9774ee8d597ad7a45aea2a46168a8414, type: 2}
+  - {fileID: 2100000, guid: ad3c2dc26548f784e9064531fbdf2c21, type: 2}
+  - {fileID: 2100000, guid: 90029454fa4352d49a3708fc7a4462bf, type: 2}
+  - {fileID: 2100000, guid: 48c991a48f424c44981a8ea78bb75c37, type: 2}
+  _fallbackMaterial: {fileID: 2100000, guid: f78d3bbbdfd9b6746a26625c926101d1, type: 2}
