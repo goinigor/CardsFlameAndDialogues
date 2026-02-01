@@ -166,6 +166,82 @@ MonoBehaviour:
   _inGameBaseUI: {fileID: 2795089414418434748}
   _flameColorControllerView: {fileID: 8705139050786603343}
   _flameObjectView: {fileID: 5585539207785506113}
+--- !u!1001 &713259712
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 493976706625098863}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25529292
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25529292
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.972
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.37
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+      propertyPath: m_Name
+      value: FancyTorch
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 7328865297070192482, guid: 65d7eaa26f8091c4f906dc940afb05af, type: 3}
+    - {fileID: -4841780293377531605, guid: 65d7eaa26f8091c4f906dc940afb05af, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+--- !u!4 &713259713 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 593162111ea952e44a4c6ebe3987c278, type: 3}
+  m_PrefabInstance: {fileID: 713259712}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &856265468
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +387,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 31
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -402,13 +478,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149980421}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1604842, y: 0, z: 0, w: 0.98703843}
-  m_LocalPosition: {x: 0, y: 2.41165, z: -2.3627403}
+  m_LocalRotation: {x: 0.15501581, y: 0.25546438, z: -0.041536372, w: 0.95340586}
+  m_LocalPosition: {x: -2.7, y: 2.41165, z: -2.3627403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 18.47, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 18.47, y: 30, z: 0}
 --- !u!114 &1149980425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,13 +556,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292688400}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.69193584, y: 0.14568757, z: 0.14568757, w: -0.69193584}
-  m_LocalPosition: {x: 0, y: -0, z: 6.33}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: -0, z: 3.58}
   m_LocalScale: {x: 6.0803, y: 6.0803, z: 6.0803}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 493976706625098863}
-  m_LocalEulerAnglesHint: {x: 270, y: -23.78, z: 0}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
 --- !u!64 &1292688402
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -726,8 +802,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -900,6 +976,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3359293533048683954, guid: d5f6aa50646f06e44806a8dd441f5026, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1715410701}
+    - targetCorrespondingSourceObject: {fileID: 3359293533048683954, guid: d5f6aa50646f06e44806a8dd441f5026, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 713259713}
     - targetCorrespondingSourceObject: {fileID: 3359293533048683954, guid: d5f6aa50646f06e44806a8dd441f5026, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1555226091}
