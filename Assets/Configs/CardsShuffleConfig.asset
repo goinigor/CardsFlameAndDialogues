@@ -15,3 +15,6 @@ MonoBehaviour:
   _cardPrefab: {fileID: 8156052821406307412, guid: a4c303a2cd4a76a4c94d61846ef05bcb, type: 3}
   _cardsCount: 144
   _cardShiftingOffset: {x: 0, y: 0.006, z: 0.01}
+  _cardMaterials:
+  - {fileID: 2100000, guid: 8aaf53d9418630841b7b2da43c9cd206, type: 2}
+  _fallbackMaterial: {fileID: 2100000, guid: 8aaf53d9418630841b7b2da43c9cd206, type: 2}

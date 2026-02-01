@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 983984c6a8d846242a9eeb69c7e7a6b6, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -564,6 +564,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 493976706625098863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1129707757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129707758}
+  m_Layer: 0
+  m_Name: LighProbes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1129707758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129707757}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1936031509}
+  m_Father: {fileID: 493976706625098863}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149980421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1062,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b9a1c0c82b4886b78bc082eef60425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CFD.Features.CardsShuffle.DeckCountView
+--- !u!1 &1936031508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1936031509}
+  - component: {fileID: 1936031510}
+  m_Layer: 0
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1936031509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936031508}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1129707758}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!220 &1936031510
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936031508}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: -2.0241208, y: 2.3574483, z: 1}
+  - {x: -2.0241208, y: 2.3574483, z: -1}
+  - {x: -2.0241208, y: 0.032904387, z: 1}
+  - {x: -2.0241208, y: 0.032904387, z: -1}
+  - {x: -2.9999998, y: 2.3574483, z: 1}
+  - {x: -2.9999998, y: 2.3574483, z: -1}
+  - {x: -2.9999998, y: 0.032904387, z: 1}
+  - {x: -2.9999998, y: 0.032904387, z: -1}
+  - {x: 3.0000002, y: 2.3574483, z: 1}
+  - {x: 3.0000002, y: 2.3574483, z: -1}
+  - {x: 3.0000002, y: 0.032904387, z: 1}
+  - {x: 3.0000002, y: 0.032904387, z: -1}
+  - {x: 1.9758793, y: 2.3574483, z: 1}
+  - {x: 1.9758793, y: 2.3574483, z: -1}
+  - {x: 1.9758793, y: 0.032904387, z: 1}
+  - {x: 1.9758793, y: 0.032904387, z: -1}
+  - {x: -1, y: 2.3574483, z: 1}
+  - {x: -1, y: 2.3574483, z: -1}
+  - {x: -1, y: 0.032904387, z: 1}
+  - {x: -1, y: 0.032904387, z: -1}
+  - {x: 1, y: 2.3574483, z: 1}
+  - {x: 1, y: 2.3574483, z: -1}
+  - {x: 1, y: 0.032904387, z: 1}
+  - {x: 1, y: 0.032904387, z: -1}
+  - {x: -0.024120927, y: 2.3574483, z: 1}
+  - {x: -0.024120927, y: 2.3574483, z: -1}
+  - {x: -0.024120927, y: 0.032904387, z: 1}
+  - {x: -0.024120927, y: 0.032904387, z: -1}
+  m_Dering: 1
 --- !u!1 &1967155661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,14 +1160,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1231,6 +1333,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3359293533048683954, guid: d5f6aa50646f06e44806a8dd441f5026, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1157559955}
+    - targetCorrespondingSourceObject: {fileID: 3359293533048683954, guid: d5f6aa50646f06e44806a8dd441f5026, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1129707758}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5f6aa50646f06e44806a8dd441f5026, type: 3}
 --- !u!4 &493976706625098863 stripped

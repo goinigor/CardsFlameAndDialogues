@@ -13,6 +13,7 @@ namespace CFD.Features.CardsShuffle
         private readonly DeckCountView _startDeckCounterView;
         private readonly DeckCountView _endDeckCounterView;
         private readonly GameObject _endingText;
+        private readonly CardPool _cardsPool;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -20,7 +21,8 @@ namespace CFD.Features.CardsShuffle
             ICardsAnimationBehaviour cardsAnimationBehaviour,
             DeckCountView startDeckCounterView,
             DeckCountView endDeckCounterView,
-            GameObject endingText
+            GameObject endingText, 
+            CardPool cardsPool
         )
         {
             _config = config;
@@ -28,6 +30,7 @@ namespace CFD.Features.CardsShuffle
             _startDeckCounterView = startDeckCounterView;
             _endDeckCounterView = endDeckCounterView;
             _endingText = endingText;
+            _cardsPool = cardsPool;
         }
 
         public void Initialize()
@@ -40,15 +43,15 @@ namespace CFD.Features.CardsShuffle
             var cards = new List<CardView>();
             
             var count = _config.CardsCount;
-            var prefab = _config.CardPrefab;
             
             cards.Capacity = count;
             
             for (int i = 0; i < count; i++)
             {
-                var cardObj = GameObject.Instantiate(prefab, _cardsAnimationBehaviour.SpawnPoint);
-                cardObj.transform.localPosition = Vector3.zero;
-                var cardView = cardObj.GetComponent<CardView>();
+                var cardView = _cardsPool.Get();
+                
+                cardView.transform.SetParent(_cardsAnimationBehaviour.SpawnPoint);
+                cardView.transform.localPosition = Vector3.zero;
                 cards.Add(cardView);
             }
 

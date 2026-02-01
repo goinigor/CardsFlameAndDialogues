@@ -15,10 +15,13 @@ namespace CFD.UI.InGame
         
         private InGameBaseUIPresenter _inGameBaseUIPresenter;
         private CardsShuffleSystem _cardsShuffleSystem;
+        private CardPool _cardsPool;
 
         public override void InstallBindings()
         {
             var sceneController = ServiceLocator.Resolve<ISceneController>();
+            _cardsPool = new CardPool(_cardsShuffleConfig.CardMaterials, _cardsShuffleConfig.FallbackMaterial, _cardsShuffleConfig.CardPrefab);
+            
             _inGameBaseUIPresenter = new InGameBaseUIPresenter(_inGameBaseUI, sceneController);
 
             _cardsShuffleSystem = new CardsShuffleSystem(
@@ -26,18 +29,21 @@ namespace CFD.UI.InGame
                 _cardsAnimationBehaviour,
                 _startDeckCounter,
                 _endDeckCounter,
-                _endingText
+                _endingText,
+                _cardsPool
             );
         }
 
         public override void Initialize()
         {
+            _cardsPool.Initialize();
             _inGameBaseUIPresenter.Initialize();
             _cardsShuffleSystem.Initialize();
         }
 
         public override void Dispose()
         {
+            _cardsPool.Clear();
             _inGameBaseUIPresenter.Dispose();
             _cardsShuffleSystem.Dispose();
         }
