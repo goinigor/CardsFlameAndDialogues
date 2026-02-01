@@ -12,20 +12,22 @@ namespace CFD.Features.CardsShuffle
         private readonly ICardsAnimationBehaviour _cardsAnimationBehaviour;
         private readonly DeckCountView _startDeckCounterView;
         private readonly DeckCountView _endDeckCounterView;
+        private readonly GameObject _endingText;
 
         private CancellationTokenSource _cancellationTokenSource;
 
-        public CardsShuffleSystem(
-            CardsShuffleConfig config, 
+        public CardsShuffleSystem(CardsShuffleConfig config,
             ICardsAnimationBehaviour cardsAnimationBehaviour,
             DeckCountView startDeckCounterView,
-            DeckCountView endDeckCounterView
-            )
+            DeckCountView endDeckCounterView,
+            GameObject endingText
+        )
         {
             _config = config;
             _cardsAnimationBehaviour = cardsAnimationBehaviour;
             _startDeckCounterView = startDeckCounterView;
             _endDeckCounterView = endDeckCounterView;
+            _endingText = endingText;
         }
 
         public void Initialize()
@@ -33,6 +35,8 @@ namespace CFD.Features.CardsShuffle
             DisposeCTS();
             _cancellationTokenSource = new CancellationTokenSource();
 
+            _endingText.SetActive(false);
+            
             var cards = new List<CardView>();
             
             var count = _config.CardsCount;
@@ -78,8 +82,15 @@ namespace CFD.Features.CardsShuffle
         private void OnShuffleCardAnimationEnded(CardView card)
         {
             card.transform.SetParent(_cardsAnimationBehaviour.EndDeckTransform, true);
-            _startDeckCounterView.SetText(_cardsAnimationBehaviour.StartDeckTransform.childCount.ToString());
-            _endDeckCounterView.SetText(_cardsAnimationBehaviour.EndDeckTransform.childCount.ToString());
+            var childCount = _cardsAnimationBehaviour.StartDeckTransform.childCount;
+            var endDeckCount = _cardsAnimationBehaviour.EndDeckTransform.childCount;
+            _startDeckCounterView.SetText(childCount.ToString());
+            _endDeckCounterView.SetText(endDeckCount.ToString());
+
+            if (endDeckCount >= _config.CardsCount)
+            {
+                _endingText.SetActive(true);
+            }
         }
 
         private void DisposeCTS()
