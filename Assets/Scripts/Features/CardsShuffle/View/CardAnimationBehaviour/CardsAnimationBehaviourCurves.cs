@@ -99,7 +99,12 @@ namespace CFD.Features.CardsShuffle
             {
                 var backwardIndex = _cards.Count - 1 - i;
                 var card = _cards[backwardIndex];
-                shuffleTasks.Add(AnimateCardShuffle(card, i * _shuffleDelay, i * _cardShiftingOffset, onCardAnimationEnd, token));
+                AnimateCardShuffle(card,  i * _cardShiftingOffset, onCardAnimationEnd, token);
+                
+                await UniTask.Delay(TimeSpan.FromSeconds(_shuffleDelay), cancellationToken: token).SuppressCancellationThrow();
+                
+                if (token.IsCancellationRequested)
+                    return;
             }
 
             await UniTask.WhenAll(shuffleTasks);
@@ -107,18 +112,11 @@ namespace CFD.Features.CardsShuffle
 
         private async UniTask AnimateCardShuffle(
             CardView card,
-            float initialDelay,
             Vector3 cardShiftingOffset,
             Action<CardView> onCardAnimationEnd,
             CancellationToken token
             )
         {
-            if (initialDelay > 0)
-                await UniTask.Delay(TimeSpan.FromSeconds(initialDelay), cancellationToken: token).SuppressCancellationThrow();
-
-            if (token.IsCancellationRequested)
-                return;
-            
             var endPosition = _cardsEndPosition.position + cardShiftingOffset;
             await AnimateCard(card, card.transform.position, endPosition, _shuffleDuration, onCardAnimationEnd, token);
         }
@@ -134,28 +132,26 @@ namespace CFD.Features.CardsShuffle
             Action<CardView> onCardAnimationEnd,
             CancellationToken token)
         {
-            var elapsedTime = 0f;
+            var startTime = Time.time;
             var cardTransform = card.transform;
-            
-            while (elapsedTime < duration)
+    
+            while (Time.time - startTime < duration)
             {
-                elapsedTime += Time.deltaTime;
+                var elapsedTime = Time.time - startTime;
                 var progress = Mathf.Clamp01(elapsedTime / duration);
                 var speedValue = _speedCurve.Evaluate(progress);
-                
+        
                 var position = Vector3.Lerp(startPos, endPos, speedValue);
                 var heightOffset = _heightToDistanceCurve.Evaluate(progress);
-                var finalPosition = position + Vector3.up * heightOffset;
-                
-                cardTransform.position = finalPosition;
-                
-                await UniTask.Yield(cancellationToken: token).SuppressCancellationThrow();
-                
+        
+                cardTransform.position = position + new Vector3(0, heightOffset, 0);
+        
+                await UniTask.WaitForEndOfFrame(cancellationToken: token).SuppressCancellationThrow();
+        
                 if (token.IsCancellationRequested)
                     return;
             }
-            
-            //hard set the position in the end
+    
             cardTransform.position = endPos;
             onCardAnimationEnd?.Invoke(card);
         }
