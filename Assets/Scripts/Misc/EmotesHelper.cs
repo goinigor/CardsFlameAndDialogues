@@ -5,26 +5,21 @@ namespace CFD.Misc
 {
     public static class EmotesHelper
     {
-        private static Dictionary<string, string> _unicodeEmotes = new Dictionary<string, string>()
+        private static readonly string SpriteCode = @"<sprite index={0}>";
+
+        private static readonly string ReplacementSymbol = "\uFFFD";
+        
+        /// <summary>
+        /// Bind known tags to the text sprites map
+        /// </summary>
+        private static Dictionary<string, int > _unicodeEmotes = new Dictionary<string, int>()
         {
-            {"satisfied", "\uD83D\uDE0A"},
-            {"surprised", "\uD83D\uDE32"},
-            {"angry", "\uD83D\uDE20"},
-            {"disappointed", "\uD83D\uDE1E"},
-            {"neutral", "\uD83D\uDE10"},
-            {"happy", "\uD83D\uDE00"},
-            {"sad", "\uD83D\uDE15"},
-            {"skeptical", "\uD83E\uDD36"},
-            {"excited", "\uD83D\uDE03"},
-            {"winking", "\uD83D\uDE09"},
-            {"laughing", "\uD83E\uDD24"},
-            {"teeth", "\uD83D\uDE02"},
-            {"confused", "\uD83D\uDE1F"},
-            {"kissing", "\uD83D\uDE17"},
-            {"tongue", "\uD83D\uDE1C"},
-            {"blush", "\uD83D\uDE0A"},
-            {"smile", "\uD83D\uDE04"},
-            {"heart", "\u2665"}
+            {"satisfied", 0},
+            {"intrigued", 1},
+            {"neutral", 2},
+            {"affirmative", 3},
+            {"laughing", 4},
+            {"win", 5},
         };
         
         /// <summary>
@@ -39,18 +34,17 @@ namespace CFD.Misc
             Regex regex = new Regex(@"\{([^}]+)\}");
             var matches = regex.Matches(text);
             
-
             foreach (Match match in matches)
             {
-                var unitcode = match.Groups[1].Value;
-                unitcodes.Add(unitcode);
-                if (_unicodeEmotes.TryGetValue(unitcode, out string unicode))
+                var tag = match.Groups[1].Value;
+                unitcodes.Add(tag);
+                if (_unicodeEmotes.TryGetValue(tag, out var index))
                 {
-                    text = text.Replace($"{{{unitcode}}}", unicode);
+                    text = text.Replace($"{{{tag}}}", string.Format(SpriteCode, index));
                 }
                 else
                 {
-                    text = text.Replace($"{{{unitcode}}}", string.Empty);
+                    text = text.Replace($"{{{tag}}}", string.Format(SpriteCode, ReplacementSymbol));
                 }
             }
 

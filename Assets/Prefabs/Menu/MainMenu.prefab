@@ -1659,7 +1659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8093138980495280708, guid: 0d2511685522e34469c2af1b1762e1fe, type: 3}
       propertyPath: m_text
-      value: Phoen ix Flame
+      value: Phoenix Flame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
