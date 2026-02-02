@@ -3,6 +3,9 @@ using UnityEngine.Serialization;
 
 namespace CFD.Misc
 {
+    /// <summary>
+    /// Adjusts camera position to fit the screen aspect ratio
+    /// </summary>
     [RequireComponent(typeof(Camera))]
     public class AspectRatioCameraFitter : MonoBehaviour
     {

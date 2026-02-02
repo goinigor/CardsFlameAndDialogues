@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace CFD.Core.UI
 {
+    /// <summary>
+    /// Base class for all canvas objects.
+    /// Can be used for any canvas object from button to panel.
+    /// </summary>
     public class View : MonoBehaviour
     {
         public event Action OnShow;

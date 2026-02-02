@@ -51,7 +51,7 @@ namespace CFD.Core
             
             if (_useAsyncLoading)
             {
-                LoadSceneAsyncCoroutine(buildIndex, null).Forget();
+                LoadSceneAsync(buildIndex, null).Forget();
             }
             else
             {
@@ -59,7 +59,7 @@ namespace CFD.Core
             }
         }
 
-        private async UniTask LoadSceneAsyncCoroutine(int buildIndex, Action onComplete)
+        private async UniTask LoadSceneAsync(int buildIndex, Action onComplete)
         {
             if (!SceneExists(buildIndex))
             {
@@ -96,7 +96,7 @@ namespace CFD.Core
             while (!asyncLoad.isDone)
             {
                 // Progress goes from 0 to 0.9, then jumps to 1 when completed, so divide on 0.9 to get a smooth progress
-                var progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
+                var progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);//TODO possible pass this progress to the loading screen
 
                 await UniTask.Yield();
             }

@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace CFD.Features.Dialogues
 {
+    /// <summary>
+    /// Caches avatars for dialogues
+    /// </summary>
     public class DialogueAvatarsCache : IDisposable
     {
         private struct IconsData
@@ -23,6 +26,9 @@ namespace CFD.Features.Dialogues
         
         private Dictionary<string, IconsData> _avatars = new Dictionary<string, IconsData>();
 
+        /// <summary>
+        /// Gets an avatar from the cache or downloads it if not cached
+        /// </summary>
         public async UniTask<Sprite> GetAvatar(AvatarData avatarData, CancellationToken token)
         {
             if (_avatars.TryGetValue(avatarData.name, out var avatar))
@@ -40,6 +46,9 @@ namespace CFD.Features.Dialogues
             return createdSprite;
         }
 
+        /// <summary>
+        /// Disposes the cached textures and sprites
+        /// </summary>
         public void Dispose()
         {
             foreach (var avatar in _avatars)

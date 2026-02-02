@@ -4,13 +4,29 @@ using UnityEngine;
 
 namespace CFD.Core.Pooling
 {
+    /// <summary>
+    /// Base object pooling system
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ObjectPool<T> where T : MonoBehaviour
     {
+        /// <summary>
+        /// Parent object for pool objects
+        /// </summary>
         protected Transform parent;
+        /// <summary>
+        /// Prefab to be pooled
+        /// </summary>
         private readonly T _prefab;
         private readonly Queue<T> _pool;
         private readonly List<T> _activeObjects;
+        /// <summary>
+        /// If true, pool will automatically create new objects when needed. If false and pool is empty, no expand but exception will be thrown
+        /// </summary>
         private readonly bool _autoExpand;
+        /// <summary>
+        /// Initial size of the pool (number of objects created on initialization of pool)
+        /// </summary>
         private readonly int _initialSize;
 
         public int ActiveCount => _activeObjects.Count;
@@ -41,6 +57,10 @@ namespace CFD.Core.Pooling
             }
         }
 
+        /// <summary>
+        /// Gets an object from the pool or creates a new one if auto-expand is enabled
+        /// </summary>
+        /// <returns></returns>
         public T Get()
         {
             T obj;
@@ -63,6 +83,10 @@ namespace CFD.Core.Pooling
             return obj;
         }
 
+        /// <summary>
+        /// Returns an object to the pool
+        /// </summary>
+        /// <param name="obj"></param>
         public void Return(T obj)
         {
             if (obj == null) return;
@@ -85,6 +109,9 @@ namespace CFD.Core.Pooling
             }
         }
 
+        /// <summary>
+        /// Returns all active objects to the pool
+        /// </summary>
         public void ReturnAll()
         {
             for (int i = _activeObjects.Count - 1; i >= 0; i--)
@@ -93,6 +120,9 @@ namespace CFD.Core.Pooling
             }
         }
 
+        /// <summary>
+        /// Clears the pool, destroying all objects
+        /// </summary>
         public void Clear()
         {
             ReturnAll();

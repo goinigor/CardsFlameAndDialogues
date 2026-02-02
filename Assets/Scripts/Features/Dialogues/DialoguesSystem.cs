@@ -40,6 +40,7 @@ namespace CFD.Features.Dialogues
             DisposeCTS();
             
             _cancellationTokenSource = new CancellationTokenSource();
+            //if data was loaded successfully, show dialogues, else show main menu
             _api.Get<DialogueData>(_config.DataUrl, DataLoadedSuccessfully, DataLoadFailed, _cancellationTokenSource.Token);
         }
 

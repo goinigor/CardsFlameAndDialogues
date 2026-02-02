@@ -5,6 +5,7 @@ using UnityEngine;
 namespace CFD
 {
     /// <summary>
+    /// Game starting point.
     /// This class is used to initialize core services and load the first scene.
     /// </summary>
     public class Bootstrap : MonoBehaviour

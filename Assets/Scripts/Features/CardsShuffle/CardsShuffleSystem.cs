@@ -33,6 +33,9 @@ namespace CFD.Features.CardsShuffle
             _cardsPool = cardsPool;
         }
 
+        /// <summary>
+        /// Creates cards and starts the animation
+        /// </summary>
         public void Initialize()
         {
             DisposeCTS();
