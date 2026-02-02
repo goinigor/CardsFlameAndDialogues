@@ -157,8 +157,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280098077
-  m_fontColor: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
+    rgba: 4294901502
+  m_fontColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.UI.ProceduralImage.ProceduralImage
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21176471, g: 0.25490198, b: 0.3254902, a: 1}
+  m_Color: {r: 0.4862745, g: 0.42745098, b: 0.2509804, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  borderWidth: 12
+  borderWidth: 6
   falloffDistance: 0
 --- !u!114 &1104249085423665866
 MonoBehaviour:
@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.UI.ProceduralImage.ProceduralImage
   m_Material: {fileID: 0}
-  m_Color: {r: 0.105882354, g: 0.14901961, b: 0.20784314, a: 1}
+  m_Color: {r: 0.07058824, g: 0.13725491, b: 0.16470589, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -866,6 +866,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: UerrRight
       objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966174723111711113, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1038,6 +1066,34 @@ PrefabInstance:
     - target: {fileID: 5820845878558252273, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
       propertyPath: m_Name
       value: UerrLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426501844733552003, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966174723111711113, guid: fbb9e7f5348e64e41a556af7da6511a1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

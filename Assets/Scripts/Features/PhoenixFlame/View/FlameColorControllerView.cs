@@ -20,6 +20,8 @@ namespace CFD.Features.PhoenixFlame
         [SerializeField] private Button _blueButton;
         [SerializeField] private Button _animatorLoopButton;
         [SerializeField] private Button _animationLoopButton;
+        [SerializeField] private Button _helpButton;
+        [SerializeField] private GameObject _helpPanel;
 
         private void Awake()
         {
@@ -28,6 +30,8 @@ namespace CFD.Features.PhoenixFlame
             _blueButton.onClick.AddListener(OnBlueButtonClick);
             _animatorLoopButton.onClick.AddListener(OnAnimatorLoopButtonClick);
             _animationLoopButton.onClick.AddListener(OnAnimationLoopButtonClick);
+            
+            _helpButton.onClick.AddListener(OnHelpButtonClick);
         }
 
         protected override void VirtualOnDestroy()
@@ -38,6 +42,8 @@ namespace CFD.Features.PhoenixFlame
             _blueButton.onClick.RemoveListener(OnBlueButtonClick);
             _animatorLoopButton.onClick.RemoveListener(OnAnimatorLoopButtonClick);
             _animationLoopButton.onClick.RemoveListener(OnAnimationLoopButtonClick);
+            
+            _helpButton.onClick.RemoveListener(OnHelpButtonClick);
         }
 
         private void OnOrangeButtonClick()
@@ -63,6 +69,11 @@ namespace CFD.Features.PhoenixFlame
         private void OnAnimationLoopButtonClick()
         {
             OnButtonClicked?.Invoke(ANIMATOR_LOOP_SINGLE_ANIMATION);
+        }
+        
+        private void OnHelpButtonClick()
+        {
+            _helpPanel.SetActive(!_helpPanel.activeSelf);
         }
     }
 }
