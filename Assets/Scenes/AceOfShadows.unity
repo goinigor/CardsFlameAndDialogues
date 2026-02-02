@@ -796,6 +796,7 @@ GameObject:
   - component: {fileID: 1149980423}
   - component: {fileID: 1149980422}
   - component: {fileID: 1149980425}
+  - component: {fileID: 1149980426}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -871,7 +872,7 @@ Transform:
   m_GameObject: {fileID: 1149980421}
   serializedVersion: 2
   m_LocalRotation: {x: 0.59661716, y: 0, z: 0, w: 0.80252606}
-  m_LocalPosition: {x: -0.339571, y: 4.64, z: -0.31}
+  m_LocalPosition: {x: -0.11364508, y: 11.633781, z: -3.3342128}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -921,6 +922,21 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1149980426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149980421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff70c01c2cd844a3b34894b4ef27a66c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CFD.Misc.AspectRatioCameraFitter
+  ReferenceResolution: {x: 3840, y: 2160}
+  ZoomFactor: {x: -0.1, y: 0.39, z: 3.35}
+  OriginPosition: {x: -0.339571, y: 4.64, z: -0.31}
 --- !u!1001 &1157559953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1469,7 +1485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0.108354166
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1477,7 +1493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0.108354166
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1521,7 +1537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -921
+      value: 583
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1921,7 +1937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0.8893543
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1929,7 +1945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0.8893543
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1973,7 +1989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 900
+      value: -596
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchoredPosition.y
