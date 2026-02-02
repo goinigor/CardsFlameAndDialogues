@@ -4,7 +4,6 @@ using UnityEngine.Serialization;
 namespace CFD.Misc
 {
     [RequireComponent(typeof(Camera))]
-    [ExecuteAlways]
     public class AspectRatioCameraFitter : MonoBehaviour
     {
         public Vector2 ReferenceResolution;

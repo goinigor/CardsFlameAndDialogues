@@ -935,7 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CFD.Misc.AspectRatioCameraFitter
   ReferenceResolution: {x: 3840, y: 2160}
-  ZoomFactor: {x: -0.1, y: 0.39, z: 3.35}
+  ZoomFactor: {x: -0.1, y: 0.22, z: 4.03}
   OriginPosition: {x: -0.339571, y: 4.64, z: -0.31}
 --- !u!1001 &1157559953
 PrefabInstance:
@@ -1485,7 +1485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.108354166
+      value: 0.23233329
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1493,7 +1493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.108354166
+      value: 0.23233329
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1537,7 +1537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 583
+      value: 136
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1937,7 +1937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.8893543
+      value: 0.7588329
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1945,7 +1945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.8893543
+      value: 0.7588329
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1989,7 +1989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -596
+      value: -126
       objectReference: {fileID: 0}
     - target: {fileID: 6877754890798692709, guid: 24e3b336632e37f44bffd956516a70df, type: 3}
       propertyPath: m_AnchoredPosition.y
