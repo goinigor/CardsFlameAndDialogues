@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using CFD.Misc;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace CFD.Features.CardsShuffle
 {
     public class CardsAnimationBehaviourCurves : MonoBehaviour, ICardsAnimationBehaviour
     {
+        [SerializeField] private ShadowBox _cardShadowBox;
+        
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private Transform _cardsStartPosition;
         [SerializeField] private Transform _cardsEndPosition;
@@ -95,10 +98,13 @@ namespace CFD.Features.CardsShuffle
 
             var shuffleTasks = new List<UniTask>();
 
+            _cardShadowBox.gameObject.SetActive(true);
+            
             for (int i = 0; i < _cards.Count; i++)
             {
                 var backwardIndex = _cards.Count - 1 - i;
                 var card = _cards[backwardIndex];
+                _cardShadowBox.transform.SetParent(card.transform, false);
                 AnimateCardShuffle(card,  i * _cardShiftingOffset, onCardAnimationEnd, token);
                 
                 await UniTask.Delay(TimeSpan.FromSeconds(_shuffleDelay), cancellationToken: token).SuppressCancellationThrow();
@@ -108,6 +114,13 @@ namespace CFD.Features.CardsShuffle
             }
 
             await UniTask.WhenAll(shuffleTasks);
+
+            if (!token.IsCancellationRequested)
+            {
+                _cardShadowBox.transform.SetParent(null);
+                _cardShadowBox.transform.position = Vector3.zero;
+                _cardShadowBox.gameObject.SetActive(false);
+            }
         }
 
         private async UniTask AnimateCardShuffle(

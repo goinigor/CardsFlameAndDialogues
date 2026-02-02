@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using CFD.Misc;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace CFD.Features.CardsShuffle
         private readonly DeckCountView _endDeckCounterView;
         private readonly GameObject _endingText;
         private readonly CardPool _cardsPool;
+        private readonly ShadowBox _shadowBoxStart;
+        private readonly ShadowBox _shadowBoxEnd;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -22,7 +25,9 @@ namespace CFD.Features.CardsShuffle
             DeckCountView startDeckCounterView,
             DeckCountView endDeckCounterView,
             GameObject endingText, 
-            CardPool cardsPool
+            CardPool cardsPool,
+            ShadowBox shadowBoxStart,
+            ShadowBox shadowBoxEnd
         )
         {
             _config = config;
@@ -31,6 +36,8 @@ namespace CFD.Features.CardsShuffle
             _endDeckCounterView = endDeckCounterView;
             _endingText = endingText;
             _cardsPool = cardsPool;
+            _shadowBoxStart = shadowBoxStart;
+            _shadowBoxEnd = shadowBoxEnd;
         }
 
         /// <summary>
@@ -83,20 +90,38 @@ namespace CFD.Features.CardsShuffle
         {
             card.transform.SetParent(_cardsAnimationBehaviour.StartDeckTransform, true);
             _startDeckCounterView.SetText(_cardsAnimationBehaviour.StartDeckTransform.childCount.ToString());
+
+            var height = _cardsAnimationBehaviour.StartDeckTransform.childCount * _config.CardShiftingOffset.y;
+            var depth = _cardsAnimationBehaviour.StartDeckTransform.childCount * _config.CardShiftingOffset.z;
+            _shadowBoxStart.SetDimensions(height, depth);
         }
         
         private void OnShuffleCardAnimationEnded(CardView card)
         {
             card.transform.SetParent(_cardsAnimationBehaviour.EndDeckTransform, true);
-            var childCount = _cardsAnimationBehaviour.StartDeckTransform.childCount;
+            var startDeckCount = _cardsAnimationBehaviour.StartDeckTransform.childCount;
             var endDeckCount = _cardsAnimationBehaviour.EndDeckTransform.childCount;
-            _startDeckCounterView.SetText(childCount.ToString());
+            _startDeckCounterView.SetText(startDeckCount.ToString());
             _endDeckCounterView.SetText(endDeckCount.ToString());
+
+            UpdateShadowBoxes(startDeckCount, endDeckCount);
 
             if (endDeckCount >= _config.CardsCount)
             {
                 _endingText.SetActive(true);
             }
+        }
+
+        private void UpdateShadowBoxes(int startDeckCount, int endDeckCount)
+        {
+            var startDeckHeight = startDeckCount * _config.CardShiftingOffset.y;
+            var startDeckDepth = startDeckCount * _config.CardShiftingOffset.z;
+            
+            var endDeckHeight = endDeckCount * _config.CardShiftingOffset.y;
+            var endDeckDepth = endDeckCount * _config.CardShiftingOffset.z;
+            
+            _shadowBoxStart.SetDimensions(startDeckHeight, startDeckDepth);
+            _shadowBoxEnd.SetDimensions(endDeckHeight, endDeckDepth);
         }
 
         private void DisposeCTS()

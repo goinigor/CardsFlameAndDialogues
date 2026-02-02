@@ -1,5 +1,6 @@
 ﻿using CFD.Core;
 using CFD.Features.CardsShuffle;
+using CFD.Misc;
 using UnityEngine;
 
 namespace CFD.UI.InGame
@@ -12,6 +13,10 @@ namespace CFD.UI.InGame
         [SerializeField] private DeckCountView _startDeckCounter;
         [SerializeField] private DeckCountView _endDeckCounter;
         [SerializeField] private GameObject _endingText;
+        
+        [Header("Shadow boxes")]
+        [SerializeField] private ShadowBox _shadowBoxStart;
+        [SerializeField] private ShadowBox _shadowBoxEnd;
         
         private InGameBaseUIPresenter _inGameBaseUIPresenter;
         private CardsShuffleSystem _cardsShuffleSystem;
@@ -30,7 +35,9 @@ namespace CFD.UI.InGame
                 _startDeckCounter,
                 _endDeckCounter,
                 _endingText,
-                _cardsPool
+                _cardsPool,
+                _shadowBoxStart,
+                _shadowBoxEnd
             );
         }
 
