@@ -182,6 +182,15 @@ Performance monitoring tool
 2. **Menu** (Index 1): Main menu scene
 3. **Other scenes** (indices are binded in the Menu scene)
 
+### General Flow Aspects
+
+- Start Boot scene. Bootstrap started, initializes core services (API, ISceneController) and start Menu scene.
+- Each next loaded scene has SceneContext object with the SceneContext attached to it. SceneContext contains list of
+AbstractMonoInstaller's
+- AbstractMonoInstaller can be treated as an entry point of the scene. There we can create presenters,
+Resolve dependencies, Initialize need features and start their behaviour.
+- Each SceneContext has implemented IDisposable patter, and clear resources on SceneContext gameObject OnDestroy method.
+
 ## Technical Specifications
 
 ### Code Patterns:

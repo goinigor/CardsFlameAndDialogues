@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace CFD.Misc
@@ -40,10 +40,20 @@ namespace CFD.Misc
             var ratio = (float)Screen.width / (float)Screen.height;
             _savedScreenResolution = new Vector2(Screen.width, Screen.height);
 
+            // Calculate base position adjustment
+            var baseAdjustment = (1f - refRatio / ratio);
+            
+            // Additional back movement for wider aspect ratios than 16:9
+            var wideRatioAdjustment = 0f;
+            if (ratio > 16f / 9f)
+            {
+                // Move camera back progressively as aspect ratio gets wider
+                wideRatioAdjustment = (ratio - 16f / 9f) * 2f;
+            }
 
-            transform.position = OriginPosition + _transformForward * (1f - refRatio / ratio) * ZoomFactor.z
-                                                + _transformRight * (1f - refRatio / ratio) * ZoomFactor.x
-                                                + _transformUp * (1f - refRatio / ratio) * ZoomFactor.y;
+            transform.position = OriginPosition + _transformForward * (baseAdjustment * ZoomFactor.z - wideRatioAdjustment)
+                                                + _transformRight * baseAdjustment * ZoomFactor.x
+                                                + _transformUp * baseAdjustment * ZoomFactor.y;
         }
     }
 }
